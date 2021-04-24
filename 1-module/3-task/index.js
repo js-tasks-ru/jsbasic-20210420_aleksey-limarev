@@ -3,5 +3,5 @@ function ucFirst(str) {
     return str;
   }
 
-  return (!str[1]) ? str.toUpperCase() : str[0].toUpperCase() + str.slice(1);
+  return str[0].toUpperCase() + str.slice(1);
 }
