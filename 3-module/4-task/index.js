@@ -1,11 +1,6 @@
-function showSalary(users, age) {
-  const result = [];
+function showSalary(users, maxAge) {
 
-  for (const user of users) {
-    if (user.age <= age) {
-      result.push(`${user.name}, ${user.balance}`);
-    }
-  }
+  return users.reduce((arr, {age, name, balance}) => age <= maxAge ? arr.concat(`${name}, ${balance}`) : arr, [])
+              .join('\n');
 
-  return result.join('\n');
 }
