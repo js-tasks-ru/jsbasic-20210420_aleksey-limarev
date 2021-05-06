@@ -1,7 +1,7 @@
 function highlight(table) {
   if (!table) {return;}
 
-  [...table.tBodies].reduce((a, b) => a.concat([...b.rows]), [])
+  [...table.tBodies].reduce((allTrArray, curTbody) => allTrArray.concat([...curTbody.rows]), [])
                     .forEach(tr => {
                       const [status, gender, age] = [...tr.children].reverse();
 
