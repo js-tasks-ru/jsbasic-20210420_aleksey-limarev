@@ -28,8 +28,10 @@ function initCarousel() {
   carouselInner.addEventListener('touchend', callCorrectSliding);
 
   function slideTo(index) {
+    const slideWidth = carouselInner.offsetWidth;
+
     currentSlide = slides[index];
-    carouselInner.style.transform = `translateX(-${100 * index}%)`;
+    carouselInner.style.transform = `translateX(-${slideWidth * index}px)`;
   }
 
   function slideToPrev() {
