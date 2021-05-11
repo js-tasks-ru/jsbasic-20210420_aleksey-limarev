@@ -78,6 +78,7 @@
   height: 100%;
   position: relative;
   margin: 0;
+  overflow: hidden;
 }
 
 .carousel__arrow {
