@@ -25,8 +25,8 @@ export default class UserTable {
     return `<${type}>${value}</${type}>`;
   }
 
-  _onBtnCloseClick(event) {
-    if (event.target.tagName !== "BUTTON") {return;}
+  _onTableRowClick(event) {
+    if (event.target.dataset.action !== "close") {return;}
 
     /*
     намеренно не использовал стрелочную функцию, так как при обработке клика
@@ -37,7 +37,7 @@ export default class UserTable {
   }
 
   _tableBodyRowTemplate({name, age, salary, city}) {
-    const cellValues = [name, age, salary, city, "<button>X</button>"];
+    const cellValues = [name, age, salary, city, "<button data-action='close'>X</button>"];
 
     return `<tr data-type="content">
                 ${ cellValues.map((field) => this._tableCellTemplate({type: "td", value: field})).join('') }
@@ -63,7 +63,7 @@ export default class UserTable {
     this._table.innerHTML += this._tableBodyTemplate();
 
     this._table.querySelectorAll("[data-type='content']").forEach(tr => {
-      tr.addEventListener("click", this._onBtnCloseClick);
+      tr.addEventListener("click", this._onTableRowClick);
     });
   }
 
