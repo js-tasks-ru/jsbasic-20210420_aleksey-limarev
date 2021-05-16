@@ -5,13 +5,21 @@ export default class ProductCard {
     this._product = product;
     this._images_path = '/assets/images/';
     this._product_images_path = '/assets/images/products/';
-    this._elem = new createElement(this._renderCard(this._product));
+    this._elem = new createElement(this._cardTemplate(this._product));
 
     this._elem.querySelector("[data-action='add']")
               .addEventListener("click", this._onCardButtonClick);
   }
 
-  _renderCard({name, price, category, image, id}) {
+  get product() {
+    return this._product;
+  }
+
+  get elem() {
+    return this._elem;
+  }
+
+  _cardTemplate({name, price, category, image, id}) {
     return `
     <div class="card" id="${id}" data-category="${category}">
       <div class="card__top">
@@ -35,13 +43,5 @@ export default class ProductCard {
     });
 
     this._elem.dispatchEvent(cardEvent);
-  }
-
-  get product() {
-    return this._product;
-  }
-
-  get elem() {
-    return this._elem;
   }
 }
