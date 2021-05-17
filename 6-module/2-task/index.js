@@ -5,7 +5,7 @@ export default class ProductCard {
     this._product = product;
     this._images_path = '/assets/images/';
     this._product_images_path = '/assets/images/products/';
-    this._elem = new createElement(this._cardTemplate(this._product));
+    this._elem = createElement(this._cardTemplate(this._product));
 
     this._elem.querySelector("[data-action='add']")
               .addEventListener("click", this._onCardButtonClick);

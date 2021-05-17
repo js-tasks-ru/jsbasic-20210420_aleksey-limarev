@@ -7,7 +7,7 @@ export default class Carousel {
     this._maxSlideIndex = this._slides.length - 1;
     this._carouselImagesPath = "/assets/images/";
     this._slideImagesPath = "/assets/images/carousel/";
-    this._elem = new createElement(this._carouselRootTemplate());
+    this._elem = createElement(this._carouselRootTemplate());
     this._carouselInner = this._elem.querySelector("[data-role='inner']");
     this._currentSlide = this._elem.querySelector("[data-role='slide']");
     this._currentSlideIndex = parseInt(this._currentSlide.dataset.slideIndex);
