@@ -7,7 +7,7 @@ export default class RibbonMenu {
     this._ribbonInner = this._elem.querySelector("[data-role='inner']");
     this._btnLeft = this._elem.querySelector("[data-arrow='left']");
     this._btnRigth = this._elem.querySelector("[data-arrow='right']");
-    this._currentActiveCategory = this._elem.querySelector("[data-role='tab']");
+    this._currentActiveCategory = this._elem.querySelector("[data-id='']");
 
     this._currentActiveCategory.classList.add("ribbon__item_active");
 
