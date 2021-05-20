@@ -61,7 +61,7 @@ export default class Modal {
     document.body.classList.add("is-modal-open");
 
     setTimeout(() => {
-      const bodyWidthAfter = document.querySelector("body.is-modal-open").clientWidth;
+      const bodyWidthAfter = document.body.clientWidth;
 
       if (bodyWidthAfter > bodyWidthBefore) {
         document.body.style.paddingRight = `${bodyWidthAfter - bodyWidthBefore}px`;
