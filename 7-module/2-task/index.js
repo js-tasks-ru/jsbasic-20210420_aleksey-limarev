@@ -7,6 +7,18 @@ export default class Modal {
     this._modalBody = this._modal.querySelector("[data-role='modal-body']");
   }
 
+  get elem() {
+    return this._modal;
+  }
+
+  get title() {
+    return this._modalTitle;
+  }
+
+  get body() {
+    return this._modalBody;
+  }
+
   open() {
     this._updateBodyForModal();
     this._addCloseActions();
