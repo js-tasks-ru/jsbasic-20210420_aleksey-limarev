@@ -128,16 +128,12 @@ export default class Cart {
     event.preventDefault();
 
     const submitBtn = this._orderForm.querySelector("[type='submit']");
-    const formData = new FormData(this._orderForm);
 
     submitBtn.classList.add("is-loading");
 
-    fetch("https://httpbin.org/post", {
-      method: "POST",
-      body: formData,
-    })
+    this._sendCartData()
       .then((response) => this._onRequestSuccess(response, submitBtn))
-      .catch(error => {throw error;});
+      .catch((error) => this._onRequestError(error, submitBtn));
   }
 
   addEventListeners() {
@@ -213,6 +209,17 @@ export default class Cart {
     cartItemElement.remove();
   }
 
+  async _sendCartData() {
+    const formData = new FormData(this._orderForm);
+
+    const response = await fetch("https://httpbin.org/post", {
+      method: "POST",
+      body: formData,
+    });
+
+    return response;
+  }
+
   _onRequestSuccess(response, submitBtn) {
     submitBtn.classList.remove("is-loading");
 
@@ -233,6 +240,23 @@ export default class Cart {
     this._totalPrice = 0;
 
     this.cartIcon.update(this);
+  }
+
+  _onRequestError(error, submitBtn) {
+    submitBtn.classList.remove("is-loading");
+
+    this._modal.setTitle("Error!");
+    this._modal.setBody(`
+      <div class="modal__body-inner">
+        <p>
+            Unfortunately your order has not been sent... :(<br>
+            <br>
+            Please, try again.<br>
+        </p>
+      </div>
+    `);
+
+    console.error(error);
   }
 }
 
