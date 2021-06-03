@@ -7,9 +7,10 @@ export default class RibbonMenu {
     this._ribbonInner = this._elem.querySelector("[data-role='inner']");
     this._btnLeft = this._elem.querySelector("[data-arrow='left']");
     this._btnRigth = this._elem.querySelector("[data-arrow='right']");
-    this._currentActiveCategory = this._elem.querySelector("[data-id='']");
+    this._currentActiveCategoryElem = this._elem.querySelector("[data-id='']");
+    this._value = this._currentActiveCategoryElem.dataset.id;
 
-    this._currentActiveCategory.classList.add("ribbon__item_active");
+    this._currentActiveCategoryElem.classList.add("ribbon__item_active");
 
     this._btnLeft.addEventListener("click", this._scrollToLeft);
     this._btnRigth.addEventListener("click", this._scrollToRight);
@@ -23,6 +24,10 @@ export default class RibbonMenu {
 
   get elem() {
     return this._elem;
+  }
+
+  get value() {
+    return this._value;
   }
 
   _ribbonMenuTemplate(categories) {
@@ -58,12 +63,14 @@ export default class RibbonMenu {
   }
 
   _onCategoryLinkClick = (event) => {
-    this._currentActiveCategory.classList.remove("ribbon__item_active");
-    this._currentActiveCategory = event.currentTarget;
-    this._currentActiveCategory.classList.add("ribbon__item_active");
+    event.preventDefault();
+
+    this._currentActiveCategoryElem.classList.remove("ribbon__item_active");
+    this._currentActiveCategoryElem = event.currentTarget;
+    this._currentActiveCategoryElem.classList.add("ribbon__item_active");
 
     const ribbonSelect = new CustomEvent("ribbon-select", {
-      detail: this._currentActiveCategory.dataset.id,
+      detail: this._currentActiveCategoryElem.dataset.id,
       bubbles: true,
     });
 

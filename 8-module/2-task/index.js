@@ -7,6 +7,9 @@ export default class ProductGrid {
     this.products = products;
     this.filters = {};
     this._elem = createElement(this._productGridTemplate());
+    this._elemInner = this._elem.querySelector("[data-role='grid-inner']");
+
+    this._fillProductGrid(this.products);
   }
 
   get elem() {
@@ -16,17 +19,17 @@ export default class ProductGrid {
   _productGridTemplate() {
     return `
       <div class="products-grid">
-        ${this._productGridInnerTemplate(this.products)}
+        <div class="products-grid__inner" data-role="grid-inner"></div>
       </div>
     `;
   }
 
-  _productGridInnerTemplate(products) {
-    return `
-      <div class="products-grid__inner" data-role="grid-inner">
-        ${products.map(product => new ProductCard(product).elem.outerHTML).join('')}
-      </div>
-    `;
+  _fillProductGrid(products) {
+    products.forEach(product => {
+      const productCard = new ProductCard(product).elem;
+
+      this._elemInner.append(productCard);
+    });
   }
 
 
@@ -48,6 +51,7 @@ export default class ProductGrid {
       filteredProducts = filteredProducts.filter(({category}) => category === this.filters.category);
     }
 
-    this._elem.innerHTML = this._productGridInnerTemplate(filteredProducts);
+    this._elemInner.innerHTML = "";
+    this._fillProductGrid(filteredProducts);
   }
 }
