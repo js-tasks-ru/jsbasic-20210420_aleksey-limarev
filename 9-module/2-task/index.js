@@ -29,10 +29,11 @@ export default class Main {
     document.querySelector("[data-slider-holder]").append(this.stepSlider.elem);
     document.querySelector("[data-cart-icon-holder]").append(this.cartIcon.elem);
 
-    return await fetch("products.json")
-                                            .then(res => res.json())
-                                            .then(products => this._onProductArrayLoaded(products))
-                                            .then(() => this._onPageRendered());
+    const response = await fetch("products.json");
+    const products = await response.json();
+
+    this._onProductArrayLoaded(products);
+    this._onPageRendered();
   }
 
   _onProductArrayLoaded(products) {
