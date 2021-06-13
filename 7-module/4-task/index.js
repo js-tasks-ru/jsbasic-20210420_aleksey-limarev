@@ -21,6 +21,10 @@ export default class StepSlider {
     return this._elem;
   }
 
+  get value() {
+    return this._value;
+  }
+
   _sliderTemplate() {
     return `
       <div class="slider">
